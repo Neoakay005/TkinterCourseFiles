@@ -1,55 +1,35 @@
-from statistics import variance
 import tkinter as tk
-from tkinter import BUTT, StringVar, ttk
+from tkinter import ttk
 import ttkbootstrap as ttk
 
-
 # window setup
-window = ttk.Window(themename = 'yeti')
-window.title("Buttons")
+window = ttk.Window(themename = 'darkly')
+window.title("Buttons, Functions an Arguments")
 window.geometry("400x200")
 # -------------------------------
 # Basic Buttons -----------------
 # function
-def button_func():
+def button_func(entry_string):
     print("basic button clicked!")
+    print(entry_string.get())
 
-button_string = StringVar(value = "Cklick!")
-button = ttk.Button(window, text="A simple button", command=button_func, textvariable=button_string)
-button.pack(pady=10)
+""" usable if you dont want to use the lambda expression
+def outher_func(parameter):
+    def inner_func():
+        print("a button was pressed")
+        print(parameter.get())
+    return inner_func
+"""
 
+entry_string = tk.StringVar(value="test")
+entry = ttk.Entry(window, textvariable=entry_string)
+entry.pack()
 
-# Basic Checkbutton -------------
-# store value
-check_var = ttk.IntVar(value = 10)  # for checked in dafault
-check = ttk.Checkbutton(
+button = ttk.Button(
     window, 
-    text="checkbox 1", 
-    command=lambda: print(f"checkbutton 1 clicked! Value: {check_var.get()}"),
-    variable=check_var,
-    onvalue= 10,
-    offvalue= -10)
-check.pack(pady=10)
-
-# Radio buttons -----------------
-
-radio_var = ttk.StringVar()
-radio1 = ttk.Radiobutton(
-    window, 
-    text = "Radio Button 1", 
-    value="radio1", 
-    variable=radio_var, 
-    command=lambda: print(radio_var.get()))
-radio1.pack()
-
-radio2 = ttk.Radiobutton(
-    window, 
-    text = "Radio Button 2", 
-    value="radio2", 
-    variable=radio_var, 
-    command=lambda: print(radio_var.get()))
-radio2.pack()
-
+    text="Button", 
+    command=lambda: button_func(entry_string))
+button.pack()
 
 # -------------------------------
 # root (update and event tracker)
